@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1543988444585678798}
   - component: {fileID: 1853875642586701669}
   - component: {fileID: 7834968289413210690}
+  - component: {fileID: 825078873863700218}
   m_Layer: 0
   m_Name: FastEnemy
   m_TagString: Untagged
@@ -122,6 +123,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EnemyScriptableObjectByType: {fileID: 11400000, guid: bfaf2e5d8575e0e4581ad374870cf231, type: 2}
+--- !u!114 &825078873863700218
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1039668780847461915}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9fe4a3a7b537c949abdebc07421d4dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4736227381664309328
 GameObject:
   m_ObjectHideFlags: 0

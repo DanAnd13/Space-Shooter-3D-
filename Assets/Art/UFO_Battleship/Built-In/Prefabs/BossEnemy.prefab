@@ -190,6 +190,7 @@ GameObject:
   - component: {fileID: 6131727698985095592}
   - component: {fileID: 5780639188827136000}
   - component: {fileID: 5058376749265136966}
+  - component: {fileID: 2580240868489264223}
   m_Layer: 0
   m_Name: BossEnemy
   m_TagString: Untagged
@@ -299,3 +300,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EnemyScriptableObjectByType: {fileID: 11400000, guid: 96ea23a4b4acf104db8334856d218e99, type: 2}
+--- !u!114 &2580240868489264223
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5627451878150353021}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9fe4a3a7b537c949abdebc07421d4dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -22,6 +22,7 @@ public class DestroingEnemy : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         _enemyHealth--;
+        other.gameObject.SetActive(false);
         if (_enemyHealth < 0)
         {
             gameObject.SetActive(false);
