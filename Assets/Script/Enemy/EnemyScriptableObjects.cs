@@ -9,6 +9,7 @@ public class EnemyScriptableObjects : ScriptableObject
     public float MovementSpeed;
     public int NumberOfEnemyInStructure;
     public TypeOfEnemy EnemyType;
+    public int BonusForDestroingTheEnemy;
     public enum TypeOfEnemy
     {
         BaseEnemy,

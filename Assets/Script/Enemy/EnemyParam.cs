@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyParam : MonoBehaviour
 {
-    public ScriptableObject EnemyScriptableObjectByType;
+    public EnemyScriptableObjects EnemyScriptableObjectByType;
     void Start()
     {
         
