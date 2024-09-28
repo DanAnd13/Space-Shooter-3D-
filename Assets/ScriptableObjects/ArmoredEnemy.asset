@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ArmoredEnemy
   m_EditorClassIdentifier: 
   Health: 5
-  MovementSpeed: 20
+  MovementSpeed: 40
   NumberOfEnemyInStructure: 2
   EnemyType: 2
   BonusForDestroingTheEnemy: 10

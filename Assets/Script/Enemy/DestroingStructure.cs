@@ -17,11 +17,11 @@ public class DestroingStructure : MonoBehaviour
     }
     private void OnEnable()
     {
-        EnemyCountInConstruction = 0;
+        EnemyCountInConstruction = _enemyScriptableObjects.NumberOfEnemyInStructure;
     }
     void Update()
     {
-        if(EnemyCountInConstruction < _enemyScriptableObjects.NumberOfEnemyInStructure)
+        if(EnemyCountInConstruction < 0)
         {
             gameObject.SetActive(false);
         }

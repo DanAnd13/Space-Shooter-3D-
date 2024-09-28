@@ -14,6 +14,7 @@ public class PlayerTakingDamage : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         _playerHealth--;
+        Debug.Log(_playerHealth);
         other.gameObject.SetActive(false);
         if (_playerHealth < 0)
         {

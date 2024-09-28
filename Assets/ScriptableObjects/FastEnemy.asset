@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: FastEnemy
   m_EditorClassIdentifier: 
   Health: 2
-  MovementSpeed: 100
+  MovementSpeed: 120
   NumberOfEnemyInStructure: 6
   EnemyType: 1
   BonusForDestroingTheEnemy: 4
