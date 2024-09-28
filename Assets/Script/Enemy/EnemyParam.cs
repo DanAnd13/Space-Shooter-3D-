@@ -5,14 +5,4 @@ using UnityEngine;
 public class EnemyParam : MonoBehaviour
 {
     public EnemyScriptableObjects EnemyScriptableObjectByType;
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

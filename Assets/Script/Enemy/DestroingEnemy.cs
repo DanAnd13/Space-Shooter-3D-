@@ -23,7 +23,7 @@ public class DestroingEnemy : MonoBehaviour
     {
         _enemyHealth--;
         other.gameObject.SetActive(false);
-        if (_enemyHealth < 0)
+        if (_enemyHealth <= 0)
         {
             gameObject.SetActive(false);
             //play death animation

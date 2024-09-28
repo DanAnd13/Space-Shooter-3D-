@@ -14,6 +14,9 @@ public class EnemyMovement : MonoBehaviour
     {
         _parameters = GetComponentInChildren<EnemyParam>();
         _enemyScriptableObjects = _parameters.EnemyScriptableObjectByType;
+    }
+    private void OnEnable()
+    {
         gameObject.transform.rotation = PlayerShipPosition.rotation;
     }
 
