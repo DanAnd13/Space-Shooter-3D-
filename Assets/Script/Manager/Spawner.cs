@@ -33,6 +33,7 @@ public class Spawner : MonoBehaviour
     {
         StartCoroutine(SpawnManager());
     }
+
     private void Update()
     {
         _spawnHeight = gameObject.transform.localScale.y;
@@ -41,7 +42,7 @@ public class Spawner : MonoBehaviour
 
     private void GetObjectPoolObjects()
     {
-            _enemyPool = ObjectPools.GetComponentsInChildren<ObjectPool>();
+        _enemyPool = ObjectPools.GetComponentsInChildren<ObjectPool>();
     }
 
     private IEnumerator SpawnManager()

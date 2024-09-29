@@ -12,7 +12,7 @@ public class ObjectPool : MonoBehaviour
         _sharedInstance = this;
     }
 
-    void Start()
+    private void Start()
     {
         WriteObjectInPool();
     }

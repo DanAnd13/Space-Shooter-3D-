@@ -5,8 +5,9 @@ using UnityEngine;
 
 public class Shooting : MonoBehaviour
 {
-    public float shootInterval = 0.5f;
-    public float shootDuration = 2f;
+    public float ShootInterval = 0.5f;
+    public float ShootDuration = 2f;
+    public Transform Gun;
     public ObjectPool Bullets;
 
     private float _reloadTime;
@@ -16,7 +17,7 @@ public class Shooting : MonoBehaviour
         if (_reloadTime <= 0f)
         {
             Shoot();
-            _reloadTime = shootInterval;
+            _reloadTime = ShootInterval;
         }
         else
         {
@@ -29,14 +30,15 @@ public class Shooting : MonoBehaviour
         GameObject shootingBullet = Bullets.GetPooledObject();
         if (shootingBullet != null)
         {
-            shootingBullet.transform.position = gameObject.transform.position;
+            shootingBullet.transform.position = Gun.position;
             shootingBullet.SetActive(true);
             StartCoroutine(BulletLiveTime(shootingBullet));
         }
     }
+
     IEnumerator BulletLiveTime(GameObject bullet)
     {
-        yield return new WaitForSeconds(shootDuration);
+        yield return new WaitForSeconds(ShootDuration);
         bullet.SetActive(false);
     }
 }
