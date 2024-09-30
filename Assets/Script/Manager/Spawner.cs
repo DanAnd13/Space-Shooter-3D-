@@ -3,10 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Spawner : MonoBehaviour
 {
     public GameObject ObjectPools;
+    public BossSpawner BossSpawner;
+    public Difficulty Difficulty;
     
     private static float _delay;
     private ObjectPool[] _enemyPool;
@@ -14,19 +17,23 @@ public class Spawner : MonoBehaviour
     private float _spawnHeight;
     private int _enemyRandom;
     private Vector3 _spawnRandom;
-    private int _enemyCountForWave;
     private int _enemyTypeCounter;
     private int _enemyCount;
+    private int _enemyCountPerWave;
 
     private void Awake()
     {
         GetObjectPoolObjects();
-        _delay = 3;
-        _enemyCountForWave = 6;
+        _enemyTypeCounter = ObjectPools.transform.childCount;
+
+        _enemyCountPerWave = Difficulty.EnemyCount;
+        Difficulty.DifficultyType = Difficulty.Type.Hard;
+        Difficulty.GetScriptableObjectsFromResources();
+
         _spawnHeight = gameObject.transform.localScale.y;
         _spawnWidth = gameObject.transform.localScale.x;
-        _enemyTypeCounter = ObjectPools.transform.childCount;
         _enemyCount = 0;
+        _delay = 3;
     }
 
     private void Start()
@@ -35,6 +42,11 @@ public class Spawner : MonoBehaviour
     }
 
     private void Update()
+    {
+        UpdateSpawnScale();
+    }
+
+    private void UpdateSpawnScale()
     {
         _spawnHeight = gameObject.transform.localScale.y;
         _spawnWidth = gameObject.transform.localScale.x;
@@ -53,10 +65,11 @@ public class Spawner : MonoBehaviour
             yield return new WaitForSeconds(_delay);
             StopCoroutine(cor1);
             _enemyCount++;
-            if (_enemyCount >= _enemyCountForWave)
-            {
+            if (_enemyCount >= _enemyCountPerWave)
+            { 
+                BossSpawner.AwakeBoss();
                 _enemyCount = 0;
-                yield return new WaitForSeconds(_delay*3);
+                yield return new WaitUntil(BossSpawner.IsBossKilled);
             }
         }
     }
@@ -72,23 +85,33 @@ public class Spawner : MonoBehaviour
     }
 
     private void RandomSpawnLocation(ObjectPool EnemyPool)
-    {
+    { 
         GameObject EnemyStructure = EnemyPool.GetPooledObject();
-        SpawnAllEnemiesInStructure(EnemyStructure);
+        ActivateAllEnemiesInStructure(EnemyStructure);
 
         if (EnemyStructure != null)
         {
             Renderer planeRenderer = GetComponent<Renderer>();
-            Vector3 planeSize = planeRenderer.bounds.size;
-            float spawnX = UnityEngine.Random.Range(-planeSize.x / 2, planeSize.x / 2);
-            float spawnY = UnityEngine.Random.Range(-planeSize.y / 2, planeSize.y / 2);
-            _spawnRandom = new Vector3(spawnX, spawnY, gameObject.transform.position.z);
-            EnemyStructure.transform.position = _spawnRandom + planeRenderer.bounds.center;
-            EnemyStructure.SetActive(true);
+            GetRandomSpawnPoint(planeRenderer);
+            SpawnEnemy(planeRenderer, EnemyStructure);
         }
     }
 
-    private void SpawnAllEnemiesInStructure(GameObject EnemyStructure)
+    private void GetRandomSpawnPoint(Renderer planeRenderer)
+    {
+        Vector3 planeSize = planeRenderer.bounds.size;
+        float spawnX = UnityEngine.Random.Range(-planeSize.x / 2, planeSize.x / 2);
+        float spawnY = UnityEngine.Random.Range(-planeSize.y / 2, planeSize.y / 2);
+        _spawnRandom = new Vector3(spawnX, spawnY, gameObject.transform.position.z);
+    }
+
+    private void SpawnEnemy(Renderer planeRenderer, GameObject EnemyStructure)
+    {
+        EnemyStructure.transform.position = _spawnRandom + planeRenderer.bounds.center;
+        EnemyStructure.SetActive(true);
+    }
+
+    private void ActivateAllEnemiesInStructure(GameObject EnemyStructure)
     { 
         GameObject[] Enemy = new GameObject[EnemyStructure.transform.childCount];
         for (int i = 0; i < Enemy.Length; i++)

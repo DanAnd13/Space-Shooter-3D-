@@ -16,6 +16,7 @@ public class ObjectPool : MonoBehaviour
     {
         WriteObjectInPool();
     }
+
     private void WriteObjectInPool()
     {
         _pooledObjects = new List<GameObject>();
@@ -27,6 +28,7 @@ public class ObjectPool : MonoBehaviour
             _pooledObjects.Add(tmp);
         }
     }
+
     public GameObject GetPooledObject()
     {
         for (int i = 0; i < gameObject.transform.childCount; i++)

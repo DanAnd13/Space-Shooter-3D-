@@ -20,9 +20,18 @@ public class ShipMovement : MonoBehaviour
 
     private void GetInput()
     {
+        InputXY();
+        InputRotation();
+    }
+
+    private void InputXY()
+    {
         _verticalInput = Input.GetAxis("Vertical");
         _horizontalInput = Input.GetAxis("Horizontal");
+    }
 
+    private void InputRotation()
+    {
         if (Input.GetKey(KeyCode.Q))
         {
             _zRotation += TiltSpeed * Time.deltaTime;

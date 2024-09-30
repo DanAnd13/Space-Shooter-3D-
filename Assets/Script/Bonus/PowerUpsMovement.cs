@@ -10,9 +10,20 @@ public class PowerUpsMovement : MonoBehaviour
 
     private void Update()
     {
+        Movement();
+    }
+
+    private void Movement()
+    {
         Vector3 direction = Vector3.back * _movementSpeed * Time.deltaTime;
         transform.position += direction;
-        if(transform.position.z < PlayerShipPosition.position.z)
+
+        EnableAfterPalyerShip();
+    }
+
+    private void EnableAfterPalyerShip()
+    {
+        if (transform.position.z < PlayerShipPosition.position.z)
         {
             gameObject.SetActive(false);
         }

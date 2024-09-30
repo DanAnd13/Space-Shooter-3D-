@@ -19,25 +19,25 @@ public class UsingPowerUps : MonoBehaviour
         _typeOfBonus = other.GetComponent<TypeOfBonus>();
         if (_typeOfBonus != null)
         {
-            StartCoroutine(StartPowerUp());  // Викликаємо корутину з об'єктом стрільби
+            StartCoroutine(StartPowerUp());
         }
     }
 
     private void GetPowerUp()
     {
-        _baseShootInterval = _gun.ShootInterval;  // Зберігаємо базовий інтервал
-        _gun.ShootInterval = _shootInterval;      // Встановлюємо новий інтервал
+        _baseShootInterval = _gun.ShootInterval;  
+        _gun.ShootInterval = _shootInterval;      
     }
 
     private void EndPowerUp()
     {
-        _gun.ShootInterval = _baseShootInterval;  // Повертаємо базовий інтервал
+        _gun.ShootInterval = _baseShootInterval;
     }
 
     private IEnumerator StartPowerUp()
     {
-        GetPowerUp();                         // Активуємо бонус
-        yield return new WaitForSeconds(_powerUpTime);  // Чекаємо часу дії бонуса
-        EndPowerUp();                         // Повертаємо інтервал назад
+        GetPowerUp();         
+        yield return new WaitForSeconds(_powerUpTime);
+        EndPowerUp();
     }
 }

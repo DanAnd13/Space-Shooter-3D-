@@ -13,8 +13,14 @@ public class PlayerTakingDamage : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        _playerHealth--;
         other.gameObject.SetActive(false);
+        LowerPlayerHealth();
+    }
+
+    private void LowerPlayerHealth()
+    {
+        _playerHealth--;
+        
         if (_playerHealth <= 0)
         {
             //loos icon

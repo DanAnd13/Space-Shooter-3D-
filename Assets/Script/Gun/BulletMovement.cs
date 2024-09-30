@@ -10,7 +10,24 @@ public class BulletMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        Vector3 velocity = Vector3.forward * _bulletSpeed * Time.deltaTime;
+        MovingByTheTypeOfGun();
+    }
+
+    private void MovingByTheTypeOfGun()
+    {
+        if (GunPosition.name == EnemyScriptableObjects.TypeOfEnemy.BossEnemy.ToString())
+        {
+            Movement(Vector3.back);
+        }
+        else
+        {
+            Movement(Vector3.forward);
+        }
+    }
+
+    private void Movement(Vector3 direction)
+    {
+        Vector3 velocity = direction * _bulletSpeed * Time.deltaTime;
         transform.position = transform.position + velocity;
     }
 }

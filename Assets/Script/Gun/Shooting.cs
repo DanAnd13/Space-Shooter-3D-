@@ -14,6 +14,11 @@ public class Shooting : MonoBehaviour
 
     private void FixedUpdate()
     {
+        ShootWithInterval();
+    }
+
+    private void ShootWithInterval()
+    {
         if (_reloadTime <= 0f)
         {
             Shoot();
@@ -25,15 +30,20 @@ public class Shooting : MonoBehaviour
         }
     }
 
-    void Shoot()
+    private void Shoot()
     {
         GameObject shootingBullet = Bullets.GetPooledObject();
         if (shootingBullet != null)
         {
-            shootingBullet.transform.position = Gun.position;
-            shootingBullet.SetActive(true);
-            StartCoroutine(BulletLiveTime(shootingBullet));
+            GetPositionAndStartMovement(shootingBullet);
         }
+    }
+
+    private void GetPositionAndStartMovement(GameObject shootingBullet)
+    {
+        shootingBullet.transform.position = Gun.position;
+        shootingBullet.SetActive(true);
+        StartCoroutine(BulletLiveTime(shootingBullet));
     }
 
     IEnumerator BulletLiveTime(GameObject bullet)
