@@ -13,45 +13,65 @@ public class Difficulty : MonoBehaviour
     }
     public int EnemyCount = 6;
 
-    private float _enemyHealth;
-    private float _enemySpeed;
-    private int _enemiesPerWave;
+    private float[] _enemyHealth;
+    private float[] _enemySpeed;
+    private int[] _enemiesPerWave;
     private EnemyScriptableObjects[] _enemyScriptableObjects;
 
-    public void GetValueFromDifficulty()
+    public void ChangeDifficultyByValues(float ScrollBarValues)
     {
-        for (int i = 0; i < _enemyScriptableObjects.Length; i++)
+        if (ScrollBarValues < 0.5f)
         {
-            ValuesFromDifficultyType(_enemyScriptableObjects[i], EnemyCount);
+            DifficultyType = Type.Easy;
         }
+        else if (ScrollBarValues > 0.5f)
+        {
+            DifficultyType = Type.Hard;
+        }
+        else
+        {
+            DifficultyType = Type.Medium;
+        }
+        GetValueFromDifficulty();
     }
 
     public void GetScriptableObjectsFromResources()
     {
         _enemyScriptableObjects = Resources.LoadAll<EnemyScriptableObjects>("ScriptableObjects");
+        _enemiesPerWave = new int[_enemyScriptableObjects.Length];
+        _enemyHealth = new float[_enemyScriptableObjects.Length];
+        _enemySpeed = new float[_enemyScriptableObjects.Length];
+
         for (int i = 0; i < _enemyScriptableObjects.Length; i++)
         {
-            GetEnemyScriptableObjectsValues(_enemyScriptableObjects[i], EnemyCount);
-            ValuesFromDifficultyType(_enemyScriptableObjects[i], EnemyCount);
+            SaveBaseScriptableObjectsValues(_enemyScriptableObjects[i], EnemyCount, i);
         }
     }
 
-    private void GetEnemyScriptableObjectsValues(EnemyScriptableObjects EnemyScriptableObjects, int EnemyCountPerWave)
+    private void GetValueFromDifficulty()
     {
-        _enemyHealth = EnemyScriptableObjects.Health;
-        _enemySpeed = EnemyScriptableObjects.MovementSpeed;
-        _enemiesPerWave = EnemyCountPerWave;
+        for (int i = 0; i < _enemyScriptableObjects.Length; i++)
+        {
+            GetEnemyScriptableObjectsValues(_enemyScriptableObjects[i], EnemyCount, i);
+        }
     }
 
-    private void ValuesFromDifficultyType(EnemyScriptableObjects EnemyScriptableObjects, int EnemyCountPerWave)
+    private void SaveBaseScriptableObjectsValues(EnemyScriptableObjects EnemyScriptableObjects, int EnemyCountPerWave, int Index)
+    {
+        _enemyHealth[Index] = EnemyScriptableObjects.Health;
+        _enemySpeed[Index] = EnemyScriptableObjects.MovementSpeed;
+        _enemiesPerWave[Index] = EnemyCountPerWave;
+    }
+
+    private void GetEnemyScriptableObjectsValues(EnemyScriptableObjects EnemyScriptableObjects, int EnemyCountPerWave, int Index)
     {
         switch (DifficultyType)
         {
             case Type.Easy:
 
-                EnemyScriptableObjects.Health = _enemyHealth;
-                EnemyScriptableObjects.MovementSpeed = _enemySpeed;
-                EnemyCountPerWave = _enemiesPerWave;
+                EnemyScriptableObjects.Health = _enemyHealth[Index];
+                EnemyScriptableObjects.MovementSpeed = _enemySpeed[Index];
+                EnemyCountPerWave = _enemiesPerWave[Index];
                 break;
 
             case Type.Medium:

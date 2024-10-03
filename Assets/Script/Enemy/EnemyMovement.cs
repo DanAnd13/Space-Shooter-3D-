@@ -24,7 +24,7 @@ public class EnemyMovement : MonoBehaviour
         gameObject.transform.rotation = PlayerShipPosition.rotation;
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         MovingByTheTypeOfEnemy();
     }

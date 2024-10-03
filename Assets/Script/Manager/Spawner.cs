@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,6 +11,7 @@ public class Spawner : MonoBehaviour
     public GameObject ObjectPools;
     public BossSpawner BossSpawner;
     public Difficulty Difficulty;
+    public UIManager UIManager;
     
     private static float _delay;
     private ObjectPool[] _enemyPool;
@@ -20,6 +22,7 @@ public class Spawner : MonoBehaviour
     private int _enemyTypeCounter;
     private int _enemyCount;
     private int _enemyCountPerWave;
+    private int _waveCounter;
 
     private void Awake()
     {
@@ -27,12 +30,13 @@ public class Spawner : MonoBehaviour
         _enemyTypeCounter = ObjectPools.transform.childCount;
 
         _enemyCountPerWave = Difficulty.EnemyCount;
-        Difficulty.DifficultyType = Difficulty.Type.Hard;
         Difficulty.GetScriptableObjectsFromResources();
+        Difficulty.ChangeDifficultyByValues(PlayerPrefs.GetFloat("Difficulty"));
 
         _spawnHeight = gameObject.transform.localScale.y;
         _spawnWidth = gameObject.transform.localScale.x;
         _enemyCount = 0;
+        _waveCounter = 1;
         _delay = 3;
     }
 
@@ -59,6 +63,7 @@ public class Spawner : MonoBehaviour
 
     private IEnumerator SpawnManager()
     {
+        UIManager.UpdateWaveCount(_waveCounter);
         while (true)
         {
             Coroutine cor1 = StartCoroutine(SpawnerWithRandomEnemy(_enemyPool, _delay));
@@ -66,10 +71,17 @@ public class Spawner : MonoBehaviour
             StopCoroutine(cor1);
             _enemyCount++;
             if (_enemyCount >= _enemyCountPerWave)
-            { 
-                BossSpawner.AwakeBoss();
+            {
+                _waveCounter++;
                 _enemyCount = 0;
-                yield return new WaitUntil(BossSpawner.IsBossKilled);
+                _enemyCountPerWave += _enemyCountPerWave;
+                if (Difficulty.DifficultyType == Difficulty.Type.Hard)
+                {
+                    BossSpawner.AwakeBoss();
+                    yield return new WaitUntil(BossSpawner.IsBossKilled);
+                }
+                UIManager.UpdateWaveCount(_waveCounter);
+                yield return new WaitForSeconds(2f);
             }
         }
     }

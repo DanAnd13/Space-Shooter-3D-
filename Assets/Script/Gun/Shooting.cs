@@ -12,7 +12,7 @@ public class Shooting : MonoBehaviour
 
     private float _reloadTime;
 
-    private void FixedUpdate()
+    private void Update()
     {
         ShootWithInterval();
     }

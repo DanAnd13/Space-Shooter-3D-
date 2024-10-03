@@ -8,7 +8,7 @@ public class PowerUpsSpawner : MonoBehaviour
 
     public void SpawnPowerUps(KillCounter KillCounter, Transform SpawnPoint)
     {
-        if (KillCounter.GetKillCount() % 3 == 0)
+        if (KillCounter.GetKillCount() % 5 == 0)
         {
             if (BonusElement != null)
             {

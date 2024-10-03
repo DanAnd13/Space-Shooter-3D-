@@ -23,7 +23,7 @@ public class DestroingStructure : MonoBehaviour
 
     void Update()
     {
-        if(EnemyCountInConstruction < 0)
+        if(EnemyCountInConstruction < EnemyCountInConstruction - 1)
         {
             gameObject.SetActive(false);
         }

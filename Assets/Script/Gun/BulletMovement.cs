@@ -8,7 +8,7 @@ public class BulletMovement : MonoBehaviour
 
     private float _bulletSpeed = 60f;
 
-    void FixedUpdate()
+    void Update()
     {
         MovingByTheTypeOfGun();
     }

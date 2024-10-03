@@ -67,5 +67,6 @@ public class DestroingEnemy : MonoBehaviour
         _killCounter.IncreaseKillCount();
         _powerUpsSpawner.SpawnPowerUps(_killCounter, gameObject.transform);
         _pointsFromDestroingEnemy.IncreasePoints(_enemyScriptableObjects.BonusForDestroingTheEnemy);
+
     }
 }
