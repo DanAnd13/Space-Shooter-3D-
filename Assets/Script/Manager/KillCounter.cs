@@ -2,23 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class KillCounter : MonoBehaviour
+namespace SpaceShooter3D.CommonLogic
 {
-    [HideInInspector]
-    public int Counter;
-
-    private void Awake()
+    public class KillCounter : MonoBehaviour
     {
-        Counter = 0;
-    }
+        [HideInInspector]
+        public int Counter;
 
-    public void IncreaseKillCount()
-    {
-        Counter ++;
-    }
+        private void Awake()
+        {
+            Counter = 0;
+        }
 
-    public int GetKillCount()
-    {
-        return Counter;
+        public void IncreaseKillCount()
+        {
+            Counter++;
+        }
+
+        public int GetKillCount()
+        {
+            return Counter;
+        }
     }
 }

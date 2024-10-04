@@ -2,26 +2,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BossSpawner : MonoBehaviour
+namespace SpaceShooter3D.CommonLogic
 {
-    public float StopPosition = 100f;
-
-    private float _spawnPosition = 150f;
-
-    public bool IsBossKilled()
+    public class BossSpawner : MonoBehaviour
     {
-        if (gameObject.activeSelf)
+        public float StopPosition = 100f;
+
+        private float _spawnPosition = 150f;
+
+        public bool IsBossKilled()
         {
-            return false;
+            if (gameObject.activeSelf)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
-        else
+        public void AwakeBoss()
         {
-            return true;
+            gameObject.transform.position = new Vector3(0, 0, _spawnPosition);
+            gameObject.SetActive(true);
         }
-    }
-    public void AwakeBoss()
-    {
-        gameObject.transform.position = new Vector3 (0, 0, _spawnPosition);
-        gameObject.SetActive(true);
     }
 }

@@ -2,14 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TypeOfBonus : MonoBehaviour
+namespace SpaceShooter3D.Parameters
 {
-    public Types BonusTypes;
-    public enum Types
+    public class TypeOfBonus : MonoBehaviour
     {
-        Damage,
-        ShootSpeed,
-        Sheald,
-        Speed
+        public Types BonusTypes;
+        public enum Types
+        {
+            Damage,
+            ShootSpeed,
+            Sheald,
+            Speed
+        }
     }
 }

@@ -2,30 +2,33 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PowerUpsMovement : MonoBehaviour
+namespace SpaceShooter3D.Mechanics
 {
-    public Transform PlayerShipPosition;
-
-    private float _movementSpeed = 50f;
-
-    private void Update()
+    public class PowerUpsMovement : MonoBehaviour
     {
-        Movement();
-    }
+        public Transform PlayerShipPosition;
 
-    private void Movement()
-    {
-        Vector3 direction = Vector3.back * _movementSpeed * Time.deltaTime;
-        transform.position += direction;
+        private float _movementSpeed = 50f;
 
-        EnableAfterPalyerShip();
-    }
-
-    private void EnableAfterPalyerShip()
-    {
-        if (transform.position.z < PlayerShipPosition.position.z)
+        private void Update()
         {
-            gameObject.SetActive(false);
+            Movement();
+        }
+
+        private void Movement()
+        {
+            Vector3 direction = Vector3.back * _movementSpeed * Time.deltaTime;
+            transform.position += direction;
+
+            EnableAfterPalyerShip();
+        }
+
+        private void EnableAfterPalyerShip()
+        {
+            if (transform.position.z < PlayerShipPosition.position.z)
+            {
+                gameObject.SetActive(false);
+            }
         }
     }
 }

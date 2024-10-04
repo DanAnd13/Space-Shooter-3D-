@@ -3,52 +3,55 @@ using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
 
-public class Shooting : MonoBehaviour
+namespace SpaceShooter3D.Mechanics
 {
-    public float ShootInterval = 0.5f;
-    public float ShootDuration = 2f;
-    public Transform Gun;
-    public ObjectPool Bullets;
-
-    private float _reloadTime;
-
-    private void Update()
+    public class Shooting : MonoBehaviour
     {
-        ShootWithInterval();
-    }
+        public float ShootInterval = 0.5f;
+        public float ShootDuration = 2f;
+        public Transform Gun;
+        public SpaceShooter3D.Parameters.ObjectPool Bullets;
 
-    private void ShootWithInterval()
-    {
-        if (_reloadTime <= 0f)
+        private float _reloadTime;
+
+        private void Update()
         {
-            Shoot();
-            _reloadTime = ShootInterval;
+            ShootWithInterval();
         }
-        else
+
+        private void ShootWithInterval()
         {
-            _reloadTime -= Time.deltaTime;
+            if (_reloadTime <= 0f)
+            {
+                Shoot();
+                _reloadTime = ShootInterval;
+            }
+            else
+            {
+                _reloadTime -= Time.deltaTime;
+            }
         }
-    }
 
-    private void Shoot()
-    {
-        GameObject shootingBullet = Bullets.GetPooledObject();
-        if (shootingBullet != null)
+        private void Shoot()
         {
-            GetPositionAndStartMovement(shootingBullet);
+            GameObject shootingBullet = Bullets.GetPooledObject();
+            if (shootingBullet != null)
+            {
+                GetPositionAndStartMovement(shootingBullet);
+            }
         }
-    }
 
-    private void GetPositionAndStartMovement(GameObject shootingBullet)
-    {
-        shootingBullet.transform.position = Gun.position;
-        shootingBullet.SetActive(true);
-        StartCoroutine(BulletLiveTime(shootingBullet));
-    }
+        private void GetPositionAndStartMovement(GameObject shootingBullet)
+        {
+            shootingBullet.transform.position = Gun.position;
+            shootingBullet.SetActive(true);
+            StartCoroutine(BulletLiveTime(shootingBullet));
+        }
 
-    IEnumerator BulletLiveTime(GameObject bullet)
-    {
-        yield return new WaitForSeconds(ShootDuration);
-        bullet.SetActive(false);
+        IEnumerator BulletLiveTime(GameObject bullet)
+        {
+            yield return new WaitForSeconds(ShootDuration);
+            bullet.SetActive(false);
+        }
     }
 }

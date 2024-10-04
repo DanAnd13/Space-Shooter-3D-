@@ -3,26 +3,29 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class EnemyHealthBar : MonoBehaviour
+namespace SpaceShooter3D.CommonLogic
 {
-    private Image _healthBar;
-    private EnemyParam _parameters;
-    private EnemyScriptableObjects _enemyScriptableObjects;
-
-    private void Awake()
+    public class EnemyHealthBar : MonoBehaviour
     {
-        _healthBar = GetComponentInChildren<Canvas>().GetComponentInChildren<Image>();
-        _parameters = GetComponent<EnemyParam>();
-        _enemyScriptableObjects = _parameters.EnemyScriptableObjectByType;
-    }
+        private Image _healthBar;
+        private SpaceShooter3D.Parameters.EnemyParam _parameters;
+        private SpaceShooter3D.Parameters.EnemyScriptableObjects _enemyScriptableObjects;
 
-    private void OnEnable()
-    {
-        _healthBar.fillAmount = 1;
-    }
+        private void Awake()
+        {
+            _healthBar = GetComponentInChildren<Canvas>().GetComponentInChildren<Image>();
+            _parameters = GetComponent<SpaceShooter3D.Parameters.EnemyParam>();
+            _enemyScriptableObjects = _parameters.EnemyScriptableObjectByType;
+        }
 
-    public void UpdateHealthBar(float currentHealth)
-    {
-        _healthBar.fillAmount = currentHealth / _enemyScriptableObjects.Health;
+        private void OnEnable()
+        {
+            _healthBar.fillAmount = 1;
+        }
+
+        public void UpdateHealthBar(float currentHealth)
+        {
+            _healthBar.fillAmount = currentHealth / _enemyScriptableObjects.Health;
+        }
     }
 }

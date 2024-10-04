@@ -4,45 +4,48 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UIManager : MonoBehaviour
+namespace SpaceShooter3D.CommonLogic
 {
-    public Image PlayerHealthBar;
-    public TextMeshProUGUI PointsText;
-    public TextMeshProUGUI WaveTitle;
-    public Canvas SettingMenuCanvas;
-    public TextMeshProUGUI SettingsTitle;
-
-    public void UpdatePlayerHealthBar(float PlayerHealthValue, float PlayerMaxHealth)
+    public class UIManager : MonoBehaviour
     {
-        PlayerHealthBar.fillAmount = PlayerHealthValue / PlayerMaxHealth;
-    }
+        public Image PlayerHealthBar;
+        public TextMeshProUGUI PointsText;
+        public TextMeshProUGUI WaveTitle;
+        public Canvas SettingMenuCanvas;
+        public TextMeshProUGUI SettingsTitle;
 
-    public void UpdatePointsValue(float Points)
-    {
-        PointsText.text = Points.ToString();
-    }
+        public void UpdatePlayerHealthBar(float PlayerHealthValue, float PlayerMaxHealth)
+        {
+            PlayerHealthBar.fillAmount = PlayerHealthValue / PlayerMaxHealth;
+        }
 
-    public void UpdateWaveCount(float WaveCount)
-    {
-        WaveTitle.text = "Wave " + WaveCount.ToString();
-        StartCoroutine(ShowWaveTitle());
-    }
+        public void UpdatePointsValue(float Points)
+        {
+            PointsText.text = Points.ToString();
+        }
 
-    public void ShowSettingCanvas(string Title)
-    {
-        SettingsTitle.text = Title;
-        SettingMenuCanvas.gameObject.SetActive(true);
-    }
+        public void UpdateWaveCount(float WaveCount)
+        {
+            WaveTitle.text = "Wave " + WaveCount.ToString();
+            StartCoroutine(ShowWaveTitle());
+        }
 
-    public void HideSettingCanvas()
-    {
-        SettingMenuCanvas.gameObject.SetActive(false);
-    }
+        public void ShowSettingCanvas(string Title)
+        {
+            SettingsTitle.text = Title;
+            SettingMenuCanvas.gameObject.SetActive(true);
+        }
 
-    private IEnumerator ShowWaveTitle()
-    {
-        WaveTitle.gameObject.SetActive(true);
-        yield return new WaitForSeconds(2f);
-        WaveTitle.gameObject.SetActive(false);
+        public void HideSettingCanvas()
+        {
+            SettingMenuCanvas.gameObject.SetActive(false);
+        }
+
+        private IEnumerator ShowWaveTitle()
+        {
+            WaveTitle.gameObject.SetActive(true);
+            yield return new WaitForSeconds(2f);
+            WaveTitle.gameObject.SetActive(false);
+        }
     }
 }

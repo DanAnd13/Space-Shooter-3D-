@@ -4,30 +4,33 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class DifficultyScrollBar : MonoBehaviour
+namespace SpaceShooter3D.CommonLogic
 {
-    public TextMeshProUGUI ScrollBarTitle;
-
-    private Scrollbar _difficultyScrollBar;
-
-    private void Awake()
+    public class DifficultyScrollBar : MonoBehaviour
     {
-        _difficultyScrollBar = GetComponent<Scrollbar>();
-    }
+        public TextMeshProUGUI ScrollBarTitle;
 
-    void Update()
-    {
-        if (_difficultyScrollBar.value < 0.5f)
+        private Scrollbar _difficultyScrollBar;
+
+        private void Awake()
         {
-            ScrollBarTitle.text = "Easy";
+            _difficultyScrollBar = GetComponent<Scrollbar>();
         }
-        else if(_difficultyScrollBar.value > 0.5f)
+
+        void Update()
         {
-            ScrollBarTitle.text = "Hard";
-        }
-        else
-        {
-            ScrollBarTitle.text = "Medium";
+            if (_difficultyScrollBar.value < 0.5f)
+            {
+                ScrollBarTitle.text = "Easy";
+            }
+            else if (_difficultyScrollBar.value > 0.5f)
+            {
+                ScrollBarTitle.text = "Hard";
+            }
+            else
+            {
+                ScrollBarTitle.text = "Medium";
+            }
         }
     }
 }

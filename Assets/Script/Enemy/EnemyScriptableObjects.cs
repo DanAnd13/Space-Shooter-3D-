@@ -2,19 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "EnemyType", menuName = "Enemy")]
-public class EnemyScriptableObjects : ScriptableObject
+namespace SpaceShooter3D.Parameters
 {
-    public float Health;
-    public float MovementSpeed;
-    public int NumberOfEnemyInStructure;
-    public TypeOfEnemy EnemyType;
-    public int BonusForDestroingTheEnemy;
-    public enum TypeOfEnemy
+    [CreateAssetMenu(fileName = "EnemyType", menuName = "Enemy")]
+    public class EnemyScriptableObjects : ScriptableObject
     {
-        BaseEnemy,
-        FastEnemy,
-        ArmoredEnemy,
-        BossEnemy
+        public float Health;
+        public float MovementSpeed;
+        public int NumberOfEnemyInStructure;
+        public TypeOfEnemy EnemyType;
+        public int BonusForDestroingTheEnemy;
+        public enum TypeOfEnemy
+        {
+            BaseEnemy,
+            FastEnemy,
+            ArmoredEnemy,
+            BossEnemy
+        }
     }
 }

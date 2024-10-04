@@ -3,22 +3,25 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class PointsFromDestroingEnemy : MonoBehaviour
+namespace SpaceShooter3D.CommonLogic
 {
-    [HideInInspector]
-    public float Points;
-    
-    private UIManager _manager;
-
-    private void Awake()
+    public class PointsFromDestroingEnemy : MonoBehaviour
     {
-        Points = 0f;
-        _manager = GetComponent<UIManager>();
-    }
+        [HideInInspector]
+        public float Points;
 
-    public void IncreasePoints(float PointsByEnemyType)
-    {
-        Points += PointsByEnemyType;
-        _manager.UpdatePointsValue(Points);
+        private UIManager _manager;
+
+        private void Awake()
+        {
+            Points = 0f;
+            _manager = GetComponent<UIManager>();
+        }
+
+        public void IncreasePoints(float PointsByEnemyType)
+        {
+            Points += PointsByEnemyType;
+            _manager.UpdatePointsValue(Points);
+        }
     }
 }

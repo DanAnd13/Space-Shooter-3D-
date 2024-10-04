@@ -3,64 +3,67 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class EnemyMovement : MonoBehaviour
+namespace SpaceShooter3D.Mechanics
 {
-    public Transform PlayerShipPosition;
-
-    private EnemyParam _parameters;
-    private EnemyScriptableObjects _enemyScriptableObjects;
-    private BossSpawner? _bossSpawner;
-
-    private void Awake()
+    public class EnemyMovement : MonoBehaviour
     {
-        _bossSpawner = GetComponent<BossSpawner>();
+        public Transform PlayerShipPosition;
 
-        _parameters = GetComponentInChildren<EnemyParam>();
-        _enemyScriptableObjects = _parameters.EnemyScriptableObjectByType;
-    }
+        private SpaceShooter3D.Parameters.EnemyParam _parameters;
+        private SpaceShooter3D.Parameters.EnemyScriptableObjects _enemyScriptableObjects;
+        private SpaceShooter3D.CommonLogic.BossSpawner? _bossSpawner;
 
-    private void OnEnable()
-    {
-        gameObject.transform.rotation = PlayerShipPosition.rotation;
-    }
-
-    private void Update()
-    {
-        MovingByTheTypeOfEnemy();
-    }
-
-    private void MovingByTheTypeOfEnemy()
-    {
-        if (_enemyScriptableObjects.EnemyType == EnemyScriptableObjects.TypeOfEnemy.BossEnemy)
+        private void Awake()
         {
-            MoveByPosition();
+            _bossSpawner = GetComponent<SpaceShooter3D.CommonLogic.BossSpawner>();
+
+            _parameters = GetComponentInChildren<SpaceShooter3D.Parameters.EnemyParam>();
+            _enemyScriptableObjects = _parameters.EnemyScriptableObjectByType;
         }
-        else
+
+        private void OnEnable()
         {
-            Movement();
-            EnableAfterPlayerPisition();
+            gameObject.transform.rotation = PlayerShipPosition.rotation;
         }
-    }
 
-    private void Movement()
-    {
-        Vector3 direction = Vector3.back * _enemyScriptableObjects.MovementSpeed * Time.deltaTime;
-        transform.position += direction;
-    }
-
-    private void EnableAfterPlayerPisition()
-    {
-        if (transform.position.z < PlayerShipPosition.position.z - 20)
+        private void Update()
         {
-            gameObject.SetActive(false);
+            MovingByTheTypeOfEnemy();
         }
-    }
 
-    private void MoveByPosition()
-    {
-        if(transform.position.z > _bossSpawner.StopPosition)
+        private void MovingByTheTypeOfEnemy()
         {
-            Movement();
+            if (_enemyScriptableObjects.EnemyType == SpaceShooter3D.Parameters.EnemyScriptableObjects.TypeOfEnemy.BossEnemy)
+            {
+                MoveByPosition();
+            }
+            else
+            {
+                Movement();
+                EnableAfterPlayerPisition();
+            }
+        }
+
+        private void Movement()
+        {
+            Vector3 direction = Vector3.back * _enemyScriptableObjects.MovementSpeed * Time.deltaTime;
+            transform.position += direction;
+        }
+
+        private void EnableAfterPlayerPisition()
+        {
+            if (transform.position.z < PlayerShipPosition.position.z - 20)
+            {
+                gameObject.SetActive(false);
+            }
+        }
+
+        private void MoveByPosition()
+        {
+            if (transform.position.z > _bossSpawner.StopPosition)
+            {
+                Movement();
+            }
         }
     }
 }

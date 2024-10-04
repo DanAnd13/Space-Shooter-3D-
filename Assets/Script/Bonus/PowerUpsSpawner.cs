@@ -2,18 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PowerUpsSpawner : MonoBehaviour
+namespace SpaceShooter3D.CommonLogic
 {
-    public GameObject BonusElement;
-
-    public void SpawnPowerUps(KillCounter KillCounter, Transform SpawnPoint)
+    public class PowerUpsSpawner : MonoBehaviour
     {
-        if (KillCounter.GetKillCount() % 5 == 0)
+        public GameObject BonusElement;
+
+        public void SpawnPowerUps(KillCounter KillCounter, Transform SpawnPoint)
         {
-            if (BonusElement != null)
+            if (KillCounter.GetKillCount() % 5 == 0)
             {
-                BonusElement.transform.position = SpawnPoint.position;
-                BonusElement.SetActive(true);
+                if (BonusElement != null)
+                {
+                    BonusElement.transform.position = SpawnPoint.position;
+                    BonusElement.SetActive(true);
+                }
             }
         }
     }

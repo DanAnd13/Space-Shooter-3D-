@@ -1,43 +1,46 @@
 using System.Collections;
 using UnityEngine;
 
-public class UsingPowerUps : MonoBehaviour
+namespace SpaceShooter3D.Mechanics
 {
-    private TypeOfBonus _typeOfBonus;
-    private Shooting _gun;
-    private float _powerUpTime = 3f;
-    private float _baseShootInterval;
-    private float _shootInterval = 0.05f;
-
-    private void Awake()
+    public class UsingPowerUps : MonoBehaviour
     {
-        _gun = GetComponent<Shooting>();
-    }
+        private SpaceShooter3D.Parameters.TypeOfBonus _typeOfBonus;
+        private Shooting _gun;
+        private float _powerUpTime = 3f;
+        private float _baseShootInterval;
+        private float _shootInterval = 0.05f;
 
-    private void OnTriggerEnter(Collider other)
-    {
-        _typeOfBonus = other.GetComponent<TypeOfBonus>();
-        if (_typeOfBonus != null)
+        private void Awake()
         {
-            StartCoroutine(StartPowerUp());
+            _gun = GetComponent<Shooting>();
         }
-    }
 
-    private void GetPowerUp()
-    {
-        _baseShootInterval = _gun.ShootInterval;  
-        _gun.ShootInterval = _shootInterval;      
-    }
+        private void OnTriggerEnter(Collider other)
+        {
+            _typeOfBonus = other.GetComponent<SpaceShooter3D.Parameters.TypeOfBonus>();
+            if (_typeOfBonus != null)
+            {
+                StartCoroutine(StartPowerUp());
+            }
+        }
 
-    private void EndPowerUp()
-    {
-        _gun.ShootInterval = _baseShootInterval;
-    }
+        private void GetPowerUp()
+        {
+            _baseShootInterval = _gun.ShootInterval;
+            _gun.ShootInterval = _shootInterval;
+        }
 
-    private IEnumerator StartPowerUp()
-    {
-        GetPowerUp();         
-        yield return new WaitForSeconds(_powerUpTime);
-        EndPowerUp();
+        private void EndPowerUp()
+        {
+            _gun.ShootInterval = _baseShootInterval;
+        }
+
+        private IEnumerator StartPowerUp()
+        {
+            GetPowerUp();
+            yield return new WaitForSeconds(_powerUpTime);
+            EndPowerUp();
+        }
     }
 }

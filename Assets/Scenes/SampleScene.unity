@@ -3638,6 +3638,7 @@ MonoBehaviour:
   BossSpawner: {fileID: 9182097932644543648}
   Difficulty: {fileID: 1527256473}
   UIManager: {fileID: 1527256474}
+  DifficultyScrollBar: {fileID: 1747601376}
 --- !u!23 &494400449
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -9234,7 +9235,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -80, y: 114.84}
+  m_AnchoredPosition: {x: -59.06, y: 118}
   m_SizeDelta: {x: 308.12, y: 134.07}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &593915110

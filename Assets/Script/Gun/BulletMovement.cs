@@ -2,32 +2,35 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BulletMovement : MonoBehaviour
+namespace SpaceShooter3D.Mechanics
 {
-    public  Transform GunPosition;
-
-    private float _bulletSpeed = 60f;
-
-    void Update()
+    public class BulletMovement : MonoBehaviour
     {
-        MovingByTheTypeOfGun();
-    }
+        public Transform GunPosition;
 
-    private void MovingByTheTypeOfGun()
-    {
-        if (GunPosition.name == EnemyScriptableObjects.TypeOfEnemy.BossEnemy.ToString())
+        private float _bulletSpeed = 60f;
+
+        void Update()
         {
-            Movement(Vector3.back);
+            MovingByTheTypeOfGun();
         }
-        else
-        {
-            Movement(Vector3.forward);
-        }
-    }
 
-    private void Movement(Vector3 direction)
-    {
-        Vector3 velocity = direction * _bulletSpeed * Time.deltaTime;
-        transform.position = transform.position + velocity;
+        private void MovingByTheTypeOfGun()
+        {
+            if (GunPosition.name == SpaceShooter3D.Parameters.EnemyScriptableObjects.TypeOfEnemy.BossEnemy.ToString())
+            {
+                Movement(Vector3.back);
+            }
+            else
+            {
+                Movement(Vector3.forward);
+            }
+        }
+
+        private void Movement(Vector3 direction)
+        {
+            Vector3 velocity = direction * _bulletSpeed * Time.deltaTime;
+            transform.position = transform.position + velocity;
+        }
     }
 }
