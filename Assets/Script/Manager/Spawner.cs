@@ -12,12 +12,12 @@ namespace SpaceShooter3D.CommonLogic
     {
         public GameObject ObjectPools;
         public BossSpawner BossSpawner;
-        public SpaceShooter3D.Parameters.Difficulty Difficulty;
+        public Parameters.Difficulty Difficulty;
         public UIManager UIManager;
         public Scrollbar DifficultyScrollBar;
 
         private static float _delay;
-        private SpaceShooter3D.Parameters.ObjectPool[] _enemyPool;
+        private Parameters.ObjectPool[] _enemyPool;
         private float _spawnWidth;
         private float _spawnHeight;
         private int _enemyRandom;
@@ -61,7 +61,7 @@ namespace SpaceShooter3D.CommonLogic
 
         private void GetObjectPoolObjects()
         {
-            _enemyPool = ObjectPools.GetComponentsInChildren<SpaceShooter3D.Parameters.ObjectPool>();
+            _enemyPool = ObjectPools.GetComponentsInChildren<Parameters.ObjectPool>();
         }
 
         private IEnumerator SpawnManager()
@@ -78,7 +78,7 @@ namespace SpaceShooter3D.CommonLogic
                     _waveCounter++;
                     _enemyCount = 0;
                     _enemyCountPerWave += _enemyCountPerWave;
-                    if (Difficulty.DifficultyType == SpaceShooter3D.Parameters.Difficulty.Type.Hard)
+                    if (Difficulty.DifficultyType == Parameters.Difficulty.Type.Hard)
                     {
                         BossSpawner.AwakeBoss();
                         yield return new WaitUntil(BossSpawner.IsBossKilled);
@@ -89,7 +89,7 @@ namespace SpaceShooter3D.CommonLogic
             }
         }
 
-        private IEnumerator SpawnerWithRandomEnemy(SpaceShooter3D.Parameters.ObjectPool[] EnemyPool, float Delay)
+        private IEnumerator SpawnerWithRandomEnemy(Parameters.ObjectPool[] EnemyPool, float Delay)
         {
             while (true)
             {
@@ -99,7 +99,7 @@ namespace SpaceShooter3D.CommonLogic
             }
         }
 
-        private void RandomSpawnLocation(SpaceShooter3D.Parameters.ObjectPool EnemyPool)
+        private void RandomSpawnLocation(Parameters.ObjectPool EnemyPool)
         {
             GameObject EnemyStructure = EnemyPool.GetPooledObject();
             ActivateAllEnemiesInStructure(EnemyStructure);

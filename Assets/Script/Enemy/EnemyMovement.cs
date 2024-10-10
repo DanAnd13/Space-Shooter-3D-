@@ -9,15 +9,15 @@ namespace SpaceShooter3D.Mechanics
     {
         public Transform PlayerShipPosition;
 
-        private SpaceShooter3D.Parameters.EnemyParam _parameters;
-        private SpaceShooter3D.Parameters.EnemyScriptableObjects _enemyScriptableObjects;
-        private SpaceShooter3D.CommonLogic.BossSpawner? _bossSpawner;
+        private Parameters.EnemyParam _parameters;
+        private Parameters.EnemyScriptableObjects _enemyScriptableObjects;
+        private CommonLogic.BossSpawner? _bossSpawner;
 
         private void Awake()
         {
             _bossSpawner = GetComponent<SpaceShooter3D.CommonLogic.BossSpawner>();
 
-            _parameters = GetComponentInChildren<SpaceShooter3D.Parameters.EnemyParam>();
+            _parameters = GetComponentInChildren<Parameters.EnemyParam>();
             _enemyScriptableObjects = _parameters.EnemyScriptableObjectByType;
         }
 
@@ -33,7 +33,7 @@ namespace SpaceShooter3D.Mechanics
 
         private void MovingByTheTypeOfEnemy()
         {
-            if (_enemyScriptableObjects.EnemyType == SpaceShooter3D.Parameters.EnemyScriptableObjects.TypeOfEnemy.BossEnemy)
+            if (_enemyScriptableObjects.EnemyType == Parameters.EnemyScriptableObjects.TypeOfEnemy.BossEnemy)
             {
                 MoveByPosition();
             }

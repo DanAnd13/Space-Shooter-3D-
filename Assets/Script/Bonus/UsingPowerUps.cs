@@ -5,7 +5,7 @@ namespace SpaceShooter3D.Mechanics
 {
     public class UsingPowerUps : MonoBehaviour
     {
-        private SpaceShooter3D.Parameters.TypeOfBonus _typeOfBonus;
+        private Parameters.TypeOfBonus _typeOfBonus;
         private Shooting _gun;
         private float _powerUpTime = 3f;
         private float _baseShootInterval;
@@ -18,7 +18,7 @@ namespace SpaceShooter3D.Mechanics
 
         private void OnTriggerEnter(Collider other)
         {
-            _typeOfBonus = other.GetComponent<SpaceShooter3D.Parameters.TypeOfBonus>();
+            _typeOfBonus = other.GetComponent<Parameters.TypeOfBonus>();
             if (_typeOfBonus != null)
             {
                 StartCoroutine(StartPowerUp());

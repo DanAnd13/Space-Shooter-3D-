@@ -17,7 +17,7 @@ namespace SpaceShooter3D.Mechanics
 
         private void MovingByTheTypeOfGun()
         {
-            if (GunPosition.name == SpaceShooter3D.Parameters.EnemyScriptableObjects.TypeOfEnemy.BossEnemy.ToString())
+            if (GunPosition.name == Parameters.EnemyScriptableObjects.TypeOfEnemy.BossEnemy.ToString())
             {
                 Movement(Vector3.back);
             }

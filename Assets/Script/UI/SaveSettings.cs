@@ -10,11 +10,11 @@ namespace SpaceShooter3D.CommonLogic
         public Scrollbar DifficultyScrollBar;
         public Slider Volume;
 
-        private SpaceShooter3D.Parameters.Difficulty _difficulty;
+        private Parameters.Difficulty _difficulty;
 
         private void Awake()
         {
-            _difficulty = GetComponent<SpaceShooter3D.Parameters.Difficulty>();
+            _difficulty = GetComponent<Parameters.Difficulty>();
             DifficultyScrollBar.value = PlayerPrefs.GetFloat("Difficulty");
             Volume.value = PlayerPrefs.GetFloat("Volume");
         }

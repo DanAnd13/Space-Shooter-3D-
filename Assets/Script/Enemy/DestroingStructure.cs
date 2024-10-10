@@ -9,12 +9,12 @@ namespace SpaceShooter3D.Mechanics
         [HideInInspector]
         public int EnemyCountInConstruction;
 
-        private SpaceShooter3D.Parameters.EnemyParam _parameters;
-        private SpaceShooter3D.Parameters.EnemyScriptableObjects _enemyScriptableObjects;
+        private Parameters.EnemyParam _parameters;
+        private Parameters.EnemyScriptableObjects _enemyScriptableObjects;
 
         private void Awake()
         {
-            _parameters = GetComponentInChildren<SpaceShooter3D.Parameters.EnemyParam>();
+            _parameters = GetComponentInChildren<Parameters.EnemyParam>();
             _enemyScriptableObjects = _parameters.EnemyScriptableObjectByType;
         }
 

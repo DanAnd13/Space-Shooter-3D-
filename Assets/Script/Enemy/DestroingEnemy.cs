@@ -9,25 +9,27 @@ namespace SpaceShooter3D.Mechanics
         public GameObject Manager;
 
         private float _enemyHealth;
-        private SpaceShooter3D.CommonLogic.PointsFromDestroingEnemy _pointsFromDestroingEnemy;
-        private SpaceShooter3D.CommonLogic.KillCounter _killCounter;
-        private SpaceShooter3D.CommonLogic.PowerUpsSpawner _powerUpsSpawner;
-        private SpaceShooter3D.CommonLogic.EnemyHealthBar _enemyHealthBar;
+        private CommonLogic.PointsFromDestroingEnemy _pointsFromDestroingEnemy;
+        private CommonLogic.KillCounter _killCounter;
+        private CommonLogic.PowerUpsSpawner _powerUpsSpawner;
+        private CommonLogic.EnemyHealthBar _enemyHealthBar;
+        private CommonLogic.VFXPlayer _vfx;
 
         private DestroingStructure _enemyStructure;
-        private SpaceShooter3D.Parameters.EnemyParam _parameters;
-        private SpaceShooter3D.Parameters.EnemyScriptableObjects _enemyScriptableObjects;
+        private Parameters.EnemyParam _parameters;
+        private Parameters.EnemyScriptableObjects _enemyScriptableObjects;
 
         private void Awake()
         {
-            _enemyHealthBar = GetComponent<SpaceShooter3D.CommonLogic.EnemyHealthBar>();
-            _parameters = GetComponent<SpaceShooter3D.Parameters.EnemyParam>();
+            _parameters = GetComponent<Parameters.EnemyParam>();
             _enemyScriptableObjects = _parameters.EnemyScriptableObjectByType;
             _enemyStructure = GetComponentInParent<DestroingStructure>();
 
-            _pointsFromDestroingEnemy = Manager.GetComponent<SpaceShooter3D.CommonLogic.PointsFromDestroingEnemy>();
-            _killCounter = Manager.GetComponent<SpaceShooter3D.CommonLogic.KillCounter>();
-            _powerUpsSpawner = Manager.GetComponent<SpaceShooter3D.CommonLogic.PowerUpsSpawner>();
+            _enemyHealthBar = GetComponent<CommonLogic.EnemyHealthBar>();
+            _pointsFromDestroingEnemy = Manager.GetComponent<CommonLogic.PointsFromDestroingEnemy>();
+            _killCounter = Manager.GetComponent<CommonLogic.KillCounter>();
+            _powerUpsSpawner = Manager.GetComponent<CommonLogic.PowerUpsSpawner>();
+            _vfx = Manager.GetComponent<CommonLogic.VFXPlayer>();
         }
         private void OnEnable()
         {
@@ -36,7 +38,7 @@ namespace SpaceShooter3D.Mechanics
 
         private void OnTriggerEnter(Collider other)
         {
-           SpaceShooter3D.Mechanics.BulletMovement collisionObj = other.GetComponent<SpaceShooter3D.Mechanics.BulletMovement>();
+           BulletMovement collisionObj = other.GetComponent<BulletMovement>();
             if (collisionObj != null)
             {
                 other.gameObject.SetActive(false);
@@ -51,6 +53,7 @@ namespace SpaceShooter3D.Mechanics
             if (_enemyHealth <= 0)
             {
                 DestroingEnemyAndIncreaseValues();
+                _vfx.PlayAnimation(transform);
             }
         }
 
@@ -58,11 +61,12 @@ namespace SpaceShooter3D.Mechanics
         {
             IncreaseKillsPointsAndSpawnBonus();
             gameObject.SetActive(false);
-            if (_enemyScriptableObjects.EnemyType != SpaceShooter3D.Parameters.EnemyScriptableObjects.TypeOfEnemy.BossEnemy)
+            if (_enemyScriptableObjects.EnemyType != Parameters.EnemyScriptableObjects.TypeOfEnemy.BossEnemy)
             {
                 _enemyStructure.EnemyCountInConstruction--;
             }
         }
+
         private void IncreaseKillsPointsAndSpawnBonus()
         {
             _killCounter.IncreaseKillCount();

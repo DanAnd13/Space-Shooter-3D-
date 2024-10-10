@@ -7,6 +7,7 @@ namespace SpaceShooter3D.CommonLogic
     public class PlayerTakingDamage : MonoBehaviour
     {
         public GameObject Manager;
+        public ParticleSystem PlayerDeathAnimation;
 
         private UIManager _uiManager;
         private LevelManager _levelManager;
@@ -31,11 +32,22 @@ namespace SpaceShooter3D.CommonLogic
         {
             _currentPlayerHealth--;
             _uiManager.UpdatePlayerHealthBar(_currentPlayerHealth, _playerHealth);
+
+            PlayDamageAnimation();
+
             if (_currentPlayerHealth <= 0)
             {
                 _uiManager.ShowSettingCanvas("Lose");
+                transform.localScale = Vector3.zero;
                 _levelManager.GetPause();
             }
+        }
+
+        private void PlayDamageAnimation()
+        {
+            PlayerDeathAnimation.gameObject.transform.position = transform.position;
+            PlayerDeathAnimation.gameObject.SetActive(true);
+            PlayerDeathAnimation.Play();
         }
     }
 }

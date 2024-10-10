@@ -8,13 +8,13 @@ namespace SpaceShooter3D.CommonLogic
     public class EnemyHealthBar : MonoBehaviour
     {
         private Image _healthBar;
-        private SpaceShooter3D.Parameters.EnemyParam _parameters;
-        private SpaceShooter3D.Parameters.EnemyScriptableObjects _enemyScriptableObjects;
+        private Parameters.EnemyParam _parameters;
+        private Parameters.EnemyScriptableObjects _enemyScriptableObjects;
 
         private void Awake()
         {
             _healthBar = GetComponentInChildren<Canvas>().GetComponentInChildren<Image>();
-            _parameters = GetComponent<SpaceShooter3D.Parameters.EnemyParam>();
+            _parameters = GetComponent<Parameters.EnemyParam>();
             _enemyScriptableObjects = _parameters.EnemyScriptableObjectByType;
         }
 

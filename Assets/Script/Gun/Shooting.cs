@@ -10,7 +10,7 @@ namespace SpaceShooter3D.Mechanics
         public float ShootInterval = 0.5f;
         public float ShootDuration = 2f;
         public Transform Gun;
-        public SpaceShooter3D.Parameters.ObjectPool Bullets;
+        public Parameters.ObjectPool Bullets;
 
         private float _reloadTime;
 
