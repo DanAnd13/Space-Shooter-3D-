@@ -14,6 +14,7 @@ namespace SpaceShooter3D.Mechanics
         private CommonLogic.PowerUpsSpawner _powerUpsSpawner;
         private CommonLogic.EnemyHealthBar _enemyHealthBar;
         private CommonLogic.VFXPlayer _vfx;
+        private CommonLogic.AudioPlayer _audioPlayer;
 
         private DestroingStructure _enemyStructure;
         private Parameters.EnemyParam _parameters;
@@ -30,6 +31,7 @@ namespace SpaceShooter3D.Mechanics
             _killCounter = Manager.GetComponent<CommonLogic.KillCounter>();
             _powerUpsSpawner = Manager.GetComponent<CommonLogic.PowerUpsSpawner>();
             _vfx = Manager.GetComponent<CommonLogic.VFXPlayer>();
+            _audioPlayer = Manager.GetComponent<CommonLogic.AudioPlayer>();
         }
         private void OnEnable()
         {
@@ -54,6 +56,7 @@ namespace SpaceShooter3D.Mechanics
             {
                 DestroingEnemyAndIncreaseValues();
                 _vfx.PlayAnimation(transform);
+                _audioPlayer.PlayEnemyKillSound();
             }
         }
 

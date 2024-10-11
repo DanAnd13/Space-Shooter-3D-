@@ -1,3 +1,4 @@
+using SpaceShooter3D.CommonLogic;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
@@ -7,6 +8,7 @@ namespace SpaceShooter3D.Mechanics
 {
     public class Shooting : MonoBehaviour
     {
+        public AudioPlayer AudioPlayer;
         public float ShootInterval = 0.5f;
         public float ShootDuration = 2f;
         public Transform Gun;
@@ -24,6 +26,7 @@ namespace SpaceShooter3D.Mechanics
             if (_reloadTime <= 0f)
             {
                 Shoot();
+                AudioPlayer.PlayShootingSound();
                 _reloadTime = ShootInterval;
             }
             else

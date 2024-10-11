@@ -15,7 +15,7 @@ namespace SpaceShooter3D.Mechanics
 
         private void Awake()
         {
-            _bossSpawner = GetComponent<SpaceShooter3D.CommonLogic.BossSpawner>();
+            _bossSpawner = GetComponent<CommonLogic.BossSpawner>();
 
             _parameters = GetComponentInChildren<Parameters.EnemyParam>();
             _enemyScriptableObjects = _parameters.EnemyScriptableObjectByType;
@@ -64,6 +64,8 @@ namespace SpaceShooter3D.Mechanics
             {
                 Movement();
             }
+            Vector3 targetPosition = new Vector3(PlayerShipPosition.position.x, PlayerShipPosition.position.y, transform.position.z);
+            transform.position = Vector3.MoveTowards(transform.position, targetPosition, _enemyScriptableObjects.MovementSpeed * Time.deltaTime);
         }
     }
 }

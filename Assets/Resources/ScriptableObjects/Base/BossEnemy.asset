@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BossEnemy
   m_EditorClassIdentifier: 
   Health: 15
-  MovementSpeed: 50
+  MovementSpeed: 10
   NumberOfEnemyInStructure: 1
   EnemyType: 3
   BonusForDestroingTheEnemy: 50

@@ -1,3 +1,4 @@
+using SpaceShooter3D.Parameters;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -12,12 +13,14 @@ namespace SpaceShooter3D.CommonLogic
     {
         public GameObject ObjectPools;
         public BossSpawner BossSpawner;
-        public Parameters.Difficulty Difficulty;
-        public UIManager UIManager;
         public Scrollbar DifficultyScrollBar;
+        public GameObject Manager;
 
+        private Difficulty _difficulty;
+        private UIManager _uiManager;
+        private AudioPlayer _audioPlayer;
         private static float _delay;
-        private Parameters.ObjectPool[] _enemyPool;
+        private ObjectPool[] _enemyPool;
         private float _spawnWidth;
         private float _spawnHeight;
         private int _enemyRandom;
@@ -32,9 +35,13 @@ namespace SpaceShooter3D.CommonLogic
             GetObjectPoolObjects();
             _enemyTypeCounter = ObjectPools.transform.childCount;
 
-            _enemyCountPerWave = Difficulty.EnemyCount;
-            Difficulty.GetScriptableObjectsFromResources();
-            Difficulty.ChangeDifficultyByValues(PlayerPrefs.GetFloat("Difficulty"));
+            _audioPlayer = Manager.GetComponent<AudioPlayer>();
+            _uiManager = Manager.GetComponent<UIManager>();
+            _difficulty = Manager.GetComponent<Difficulty>();
+
+            _enemyCountPerWave = _difficulty.EnemyCount;
+            _difficulty.GetScriptableObjectsFromResources();
+            _difficulty.ChangeDifficultyByValues(PlayerPrefs.GetFloat("Difficulty"));
 
             _spawnHeight = gameObject.transform.localScale.y;
             _spawnWidth = gameObject.transform.localScale.x;
@@ -66,7 +73,7 @@ namespace SpaceShooter3D.CommonLogic
 
         private IEnumerator SpawnManager()
         {
-            UIManager.UpdateWaveCount(_waveCounter);
+            _uiManager.UpdateWaveCount(_waveCounter);
             while (true)
             {
                 Coroutine cor1 = StartCoroutine(SpawnerWithRandomEnemy(_enemyPool, _delay));
@@ -78,12 +85,13 @@ namespace SpaceShooter3D.CommonLogic
                     _waveCounter++;
                     _enemyCount = 0;
                     _enemyCountPerWave += _enemyCountPerWave;
-                    if (Difficulty.DifficultyType == Parameters.Difficulty.Type.Hard)
+                    if (_difficulty.DifficultyType == Parameters.Difficulty.Type.Hard)
                     {
                         BossSpawner.AwakeBoss();
                         yield return new WaitUntil(BossSpawner.IsBossKilled);
                     }
-                    UIManager.UpdateWaveCount(_waveCounter);
+                    _uiManager.UpdateWaveCount(_waveCounter);
+                    _audioPlayer.PlayNextWaveSound();
                     yield return new WaitForSeconds(2f);
                 }
             }

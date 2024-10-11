@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f826b0c04271a849b43f496f7fd773f, type: 3}
   m_Name: BossEnemy
   m_EditorClassIdentifier: 
-  Health: 33.75
-  MovementSpeed: 112.5
+  Health: 15
+  MovementSpeed: 10
   NumberOfEnemyInStructure: 1
   EnemyType: 3
   BonusForDestroingTheEnemy: 50

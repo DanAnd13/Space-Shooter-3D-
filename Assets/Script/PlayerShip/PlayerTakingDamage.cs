@@ -9,6 +9,7 @@ namespace SpaceShooter3D.CommonLogic
         public GameObject Manager;
         public ParticleSystem PlayerDeathAnimation;
 
+        private AudioPlayer _audioPlayer;
         private UIManager _uiManager;
         private LevelManager _levelManager;
         private float _playerHealth = 10f;
@@ -18,6 +19,7 @@ namespace SpaceShooter3D.CommonLogic
         {
             _uiManager = Manager.GetComponent<UIManager>();
             _levelManager = Manager.GetComponent<LevelManager>();
+            _audioPlayer = Manager.GetComponent<AudioPlayer>();
 
             _currentPlayerHealth = _playerHealth;
         }
@@ -34,10 +36,12 @@ namespace SpaceShooter3D.CommonLogic
             _uiManager.UpdatePlayerHealthBar(_currentPlayerHealth, _playerHealth);
 
             PlayDamageAnimation();
+            _audioPlayer.PlayPlayerTakeDamageSound();
 
             if (_currentPlayerHealth <= 0)
             {
                 _uiManager.ShowSettingCanvas("Lose");
+                _audioPlayer.PlayLoseSound();
                 transform.localScale = Vector3.zero;
                 _levelManager.GetPause();
             }
